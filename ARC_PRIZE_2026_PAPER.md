@@ -53,6 +53,14 @@ exact, calibration-free decision rule.
   report a calibration-free 0-confident-error guarantee — our distinguishing property.**
 - **MDL / Occam** (CompressARC) — we adopt a lightweight Occam ordering: among consistent
   candidates, prefer the simplest (shortest program) for the ambiguous-case attempt.
+- **Conformal selective prediction** (general risk control, 2603.24704) provides formal
+  error bounds on trusted (non-abstained) predictions. **Structural abstention** (2608.13926)
+  argues refusal "needs no confidence estimate, because unanswerable requests are
+  unrepresentable" — our closest philosophical relative. We sit precisely at their
+  intersection but in a new domain: **calibration-free, structural abstention for VISUAL
+  PROGRAM SYNTHESIS (ARC)**, where the "unrepresentable/ambiguous" signal is the
+  distinct-output cardinality of train-consistent programs. To our knowledge this exact
+  combination is unexplored in the ARC literature.
 - **Library learning** (DreamCoder) is the accepted route to broad coverage. We show
   (negatively, empirically) why hand-coded DSLs plateau, motivating that direction.
 
