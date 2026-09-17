@@ -653,8 +653,14 @@ def _extra_predict(c,g):
 # wrap the entrypoint's _solve_test_input to also consider extra candidates
 # ================= KAGGLE ENTRYPOINT (RAKSHANEX, self-contained, no internet/LLM) =================
 import glob as _glob
+def _occam_key(cand):
+    k,v=cand
+    return len(v) if k=="fixed" else 1   # shorter chain = simpler (Occam/MDL, cf. CompressARC)
+
 def _solve_test_input(train, ti):
     C=consistent_candidates(train)
+    # Occam ordering: simplest consistent candidate first (MDL-inspired tie-break)
+    C=sorted(C, key=_occam_key)
     D=distinct_outputs(C, ti)
     ti=np.asarray(ti)
     for _c in _extra_candidates(train):
