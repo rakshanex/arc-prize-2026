@@ -220,16 +220,7 @@ def main(test_path=None, out_path="submission.json"):
     print(f"Wrote {out_path}: {len(submission)} tasks, {n_total} inputs, {n_conf} RAKSHANEX-confident.")
 
 if __name__=="__main__":
-    local="arc_agi2/data/training"
-    if os.path.isdir(local):
-        files=sorted(glob.glob(local+"/*.json"))[:5]
-        tasks={}
-        for f in files:
-            d=json.load(open(f)); tid=os.path.basename(f).replace(".json","")
-            tasks[tid]={"train":d["train"],"test":[{"input":d["test"][0]["input"]}]}
-        json.dump(tasks, open("/tmp/_dry_test.json","w"))
-        main(test_path="/tmp/_dry_test.json", out_path="/tmp/_dry_submission.json")
-        sub=json.load(open("/tmp/_dry_submission.json"))
-        print("dry-run OK, keys:", list(sub.keys()))
-    else:
-        main()
+    # KAGGLE NOTEBOOK ENTRYPOINT — paste into a Kaggle notebook cell and run.
+    # Auto-detects test file under /kaggle/input, writes /kaggle/working/submission.json.
+    # Self-contained: numpy+json only, no internet/LLM (rule-compliant).
+    main(test_path=None, out_path="/kaggle/working/submission.json")
