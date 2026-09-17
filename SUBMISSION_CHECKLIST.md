@@ -1,69 +1,47 @@
-# RAKSHANEX — ARC Prize 2026 Submission Checklist & Timeline
+# RAKSHANEX — ARC Prize 2026 Submission Checklist & Status
 
-Org: RAKSHANEX TECHNOLOGIES · Track: Paper Prize (linked to ARC-AGI-2)
+Org: RAKSHANEX TECHNOLOGIES · Account: piyush295 (mr.piyush295@gmail.com)
+Repo: https://github.com/rakshanex/arc-prize-2026 (public, MIT-0)
 
 ═══════════════════════════════════════════════════════════════════
 
-## KEY DATES (from arcprize.org/competitions/2026)
+## KEY DATES
 | Date | Event |
 |---|---|
-| Mar 25, 2026 | Competition started |
-| Nov 2, 2026 | **Code submissions due** (Kaggle) |
-| **Nov 8, 2026** | **Papers due** ← our target |
+| Nov 2, 2026 | Code submissions due (ARC-AGI-2) |
+| **Nov 9, 2026** | **Papers due** (Paper Track) |
 | Dec 4, 2026 | Results announced |
+Aaj: Sep 17, 2026 — **~52 din bache.**
 
-Aaj (~Sep 17, 2026): **~7 weeks / 52 din bache.** Time kaafi hai.
+## ✅ DONE (ho chuka hai)
+- [x] Kaggle CLI + auth working (piyush295)
+- [x] Joined: Paper Track + ARC-AGI-2 (phone verified)
+- [x] Self-contained solver (numpy only, no internet/LLM — rule compliant)
+- [x] Solver verified on REAL Kaggle data (240 test tasks, format 100% valid)
+- [x] Kernel pushed + run on Kaggle (COMPLETE), multiple versions
+- [x] **ARC-AGI-2 submission made** (v1, id 56298829; score 0.00 — coverage low, expected)
+- [x] GitHub repo public + open-source (MIT-0), all 8 files present
+- [x] Paper written in rubric format (ARC_PRIZE_2026_PAPER.md)
+- [x] Solver improved: ARC-AGI-2 training 35 → 47 solved, 0 wrong (rules + Occam)
+- [x] Positioning vs published CPU solvers (VSA/CompressARC) documented
 
-═══════════════════════════════════════════════════════════════════
+## ⬜ REMAINING (manual, on Kaggle website — only you can do)
+1. **(optional) Re-submit upgraded solver** to ARC-AGI-2 when daily limit resets
+   (kernel already pushed; `kaggle competitions submit ... -v <latest>`). Score will
+   still be low — that's fine, code submission only needs to exist for Paper eligibility.
+2. **Paper → PDF:** convert `ARC_PRIZE_2026_PAPER.md` to PDF (any md→pdf tool).
+3. **Submit paper** on Paper Track (kaggle.com/competitions/arc-prize-2026-paper-track):
+   upload PDF, link to the ARC-AGI-2 code submission + GitHub repo. (by Nov 9)
 
-## WHAT'S READY (is package mein)
-- [x] Self-contained Kaggle solver: `arc_prize_submission.py` (numpy only, no internet/LLM ✓ rule-compliant)
-- [x] Paper (rubric format): `ARC_PRIZE_2026_PAPER.md`
-- [x] Open-source license: `LICENSE` (MIT-0 ✓ required)
-- [x] Submission README: `SUBMISSION_README.md`
-- [x] Full reproducible research trail + independent audits
+## HONEST EXPECTATIONS
+- Leaderboard accuracy is low (CPU/symbolic ceiling; frontier LLMs dominate) — expected.
+- Paper Prize is the realistic shot: our **0-confident-error + 6-domain universality +
+  honest methodology** score on universality/theory/novelty, not just accuracy.
+- Outstanding Papers Pool ($375K, rubric ≥4.5) allows multiple winners — best target.
+- Nothing is guaranteed (judges' discretion). Real value regardless: a published,
+  open-source, cited-able research artifact under your/RAKSHANEX name.
 
-## WHAT YOU (user) MUST DO MANUALLY
-Ye main aapke liye nahi kar sakta (account/identity + external sites chahiye):
-
-1. **Kaggle account** banao (free): kaggle.com
-2. **Competition join karo:** "ARC Prize 2026 - ARC-AGI-2" (aur "Paper Track")
-   - kaggle.com/competitions/arc-prize-2026-arc-agi-2
-   - kaggle.com/competitions/arc-prize-2026-paper-track
-3. **Notebook banao Kaggle par:** `arc_prize_submission.py` ka code ek Kaggle notebook
-   mein paste karo. Wo `/kaggle/input/...` se test file padhega, `submission.json`
-   `/kaggle/working/` mein likhega. "Submit" dabao (Code submission, before Nov 2).
-4. **Open-source karo:** code ko public GitHub repo mein daalo with `LICENSE` (MIT-0).
-   (Rule: leading participants must open-source to be eligible.)
-5. **Paper submit karo:** `ARC_PRIZE_2026_PAPER.md` ko PDF banao (koi bhi md→pdf tool),
-   aur Paper Track par upload karo, apni Kaggle code submission se link karke (before Nov 8).
-
-## PRE-SUBMIT CHECKLIST
-- [ ] Kaggle notebook runs end-to-end, writes valid `submission.json` (format verified locally ✓)
-- [ ] No internet/API calls in notebook (verified: pure numpy ✓)
-- [ ] GitHub repo public + `LICENSE` (MIT-0) present
-- [ ] Paper PDF: author = RAKSHANEX TECHNOLOGIES (+ aapka naam jo daalna ho)
-- [ ] Paper links to the Kaggle submission
-- [ ] Submitted before deadlines (code Nov 2, paper Nov 8)
-
-═══════════════════════════════════════════════════════════════════
-
-## HONEST EXPECTATIONS (main sach bolta hoon)
-- **Top Paper ($75K):** bahut competitive (SOTA teams). Realistically hamari coverage
-  (~10%) ke saath ye mushkil hai.
-- **Outstanding Papers Pool ($375K, rubric ≥4.5):** yahan hamara best shot hai —
-  hamari **universality (6 domains), theory, novelty** strong hain. Par ye bhi
-  guarantee NAHI — judges ka discretion hai.
-- **Sabse realistic value:** ek real, open-source, published research artifact aapke
-  naam par; feedback; credibility; aur seekhne ka experience. Paisa **possible** hai,
-  **guaranteed nahi**. Koi bhi "pakka jeet" kahe to galat.
-
-## AGAR COVERAGE BADHANI HO (optional, prize chance badhane ke liye)
-- Learned/neural DSL (GPU chahiye — Kaggle/Colab free GPU se try). Ye bada kaam hai,
-  par accuracy criterion aur solve-rate seedha badhata hai. 52 din mein basic version
-  possible, par uncertain.
-
-## BOTTOM LINE
-Package **submission-ready** hai. Aapko sirf Kaggle/GitHub par upload + paper PDF
-banakar submit karna hai (steps upar). Deadline door hai, quality par focus kar sakte
-ho. Ye ek honest, real, paisa-potential raasta hai — bina kisi jhooth ke.
+## REPO CONTENTS (all live, public)
+arc_prize_submission.py · kaggle_notebook_RAKSHANEX.py · ARC_PRIZE_2026_PAPER.md ·
+RAKSHANEX_positioning_vs_solvers.md · LICENSE (MIT-0) · README.md · SUBMISSION_README.md ·
+SUBMISSION_CHECKLIST.md
