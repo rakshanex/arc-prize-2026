@@ -616,12 +616,38 @@ def _extra_candidates(train):
         if ok and used: out.append(("fill",fc)); break
     if all(np.asarray(gi).shape==np.asarray(go).shape and np.array_equal(_symmetrize(gi),go) for gi,go in train):
         out.append(("sym",None))
+    # compress (remove uniform rows/cols)
+    def _compress(g):
+        g=np.asarray(g); ri=[i for i in range(g.shape[0]) if len(set(g[i]))==1]; ci=[j for j in range(g.shape[1]) if len(set(g[:,j]))==1]
+        kr=[i for i in range(g.shape[0]) if i not in ri]; kc=[j for j in range(g.shape[1]) if j not in ci]
+        if not kr or not kc: raise ValueError()
+        return g[np.ix_(kr,kc)]
+    try:
+        if all(eq(_compress(gi),go) for gi,go in train): out.append(("compress",None))
+    except Exception: pass
+    # color switch a<->b
+    pals=set()
+    for gi,go in train: pals|=set(np.unique(gi).tolist())
+    pl=sorted(pals)
+    for _i in range(len(pl)):
+        for _j in range(_i+1,len(pl)):
+            a,b=pl[_i],pl[_j]; ok=True
+            for gi,go in train:
+                gi=np.asarray(gi); o=gi.copy(); o[gi==a]=b; o[gi==b]=a
+                if not np.array_equal(o,go): ok=False;break
+            if ok: out.append(("switch",(a,b)))
     return out
 def _extra_predict(c,g):
     k,v=c
     if k=="fill":
         enc=_enclosed_mask(g); o=np.asarray(g).copy(); o[enc]=v; return o
     if k=="sym": return _symmetrize(g)
+    if k=="compress":
+        g=np.asarray(g); ri=[i for i in range(g.shape[0]) if len(set(g[i]))==1]; ci=[j for j in range(g.shape[1]) if len(set(g[:,j]))==1]
+        kr=[i for i in range(g.shape[0]) if i not in ri]; kc=[j for j in range(g.shape[1]) if j not in ci]
+        return g[np.ix_(kr,kc)]
+    if k=="switch":
+        a,b=v; g=np.asarray(g); o=g.copy(); o[g==a]=b; o[g==b]=a; return o
     raise ValueError("x")
 
 # wrap the entrypoint's _solve_test_input to also consider extra candidates
