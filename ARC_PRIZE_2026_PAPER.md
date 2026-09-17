@@ -89,8 +89,9 @@ than emit a spurious match.
 - **ARC-AGI-1 public training (400 tasks, 416 test pairs):** 40 solved, **0 wrong**,
   answered-precision **100%**; always-answer baseline ≈ 8% precision (~92% wrong).
 - **ARC-AGI-2 training (1000 tasks):** 47 solved, **0 wrong**, 100% answered-precision
-  (grew methodically from 24→47 as principled rules were added: object ops, colormap,
-  symmetry-repair, periodic/enclosed fill, compress, color-switch, learned local rules).
+  (grew methodically as principled rules were added: object ops, colormap, symmetry-repair,
+  periodic/enclosed fill, compress, color-switch, learned local rules, and a fractal/
+  self-tiling rule with learned blank color — each consistency-checked, keeping WRONG=0).
 - **ARC-AGI-2 (harder, unseen eval subset):** solved a fraction with **0 wrong** — the
   safety property holds under distribution shift.
 - **Transferability:** applied to an independent external solver (retrieval + naive
