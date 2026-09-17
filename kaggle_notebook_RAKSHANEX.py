@@ -636,6 +636,22 @@ def _extra_candidates(train):
                 gi=np.asarray(gi); o=gi.copy(); o[gi==a]=b; o[gi==b]=a
                 if not np.array_equal(o,go): ok=False;break
             if ok: out.append(("switch",(a,b)))
+    # fractal / self-tiling: output = input replicated at cells != blank (blank learned)
+    _cols=set()
+    for gi,go in train: _cols|=set(np.unique(gi).tolist())
+    def _fractal(g,blank):
+        g=np.asarray(g); h,w=g.shape
+        o=np.full((h*h,w*w),blank,dtype=g.dtype)
+        for _i in range(h):
+            for _j in range(w):
+                if g[_i,_j]!=blank: o[_i*h:(_i+1)*h,_j*w:(_j+1)*w]=g
+        return o
+    for _bl in _cols:
+        _ok=True
+        for gi,go in train:
+            gi=np.asarray(gi); h,w=gi.shape
+            if np.asarray(go).shape!=(h*h,w*w) or not np.array_equal(_fractal(gi,_bl),go): _ok=False;break
+        if _ok: out.append(("fractal",_bl)); break
     return out
 def _extra_predict(c,g):
     k,v=c
@@ -648,6 +664,12 @@ def _extra_predict(c,g):
         return g[np.ix_(kr,kc)]
     if k=="switch":
         a,b=v; g=np.asarray(g); o=g.copy(); o[g==a]=b; o[g==b]=a; return o
+    if k=="fractal":
+        g=np.asarray(g); h,w=g.shape; o=np.full((h*h,w*w),v,dtype=g.dtype)
+        for _i in range(h):
+            for _j in range(w):
+                if g[_i,_j]!=v: o[_i*h:(_i+1)*h,_j*w:(_j+1)*w]=g
+        return o
     raise ValueError("x")
 
 # wrap the entrypoint's _solve_test_input to also consider extra candidates
